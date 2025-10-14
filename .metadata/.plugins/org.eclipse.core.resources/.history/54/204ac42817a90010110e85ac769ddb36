@@ -1,0 +1,76 @@
+package com.school.school.beans;
+
+
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
+import jakarta.persistence.*;
+import jakarta.validation.constraints.*;
+
+@Entity
+@Table
+public class Student {
+	 @Id
+	 @GeneratedValue(strategy = GenerationType.IDENTITY)
+	private int id;
+
+ // ✅ NAME VALIDATION
+    @NotBlank(message = "Name is required")
+    @Size(min = 2, max = 50, message = "Name must be between 2 and 50 characters")
+    @Pattern(
+        regexp = "^[A-Za-z ]+$",
+        message = "Name must contain only letters and spaces"
+    )
+    private String first_Name;
+ // ✅ NAME VALIDATION
+    @NotBlank(message = "Name is required")
+    @Size(min = 2, max = 50, message = "Name must be between 2 and 50 characters")
+    @Pattern(
+        regexp = "^[A-Za-z ]+$",
+        message = "Name must contain only letters and spaces"
+    )
+    private String last_Name;
+    
+    public int getId() {
+		return id;
+	}
+	public void setId(int id) {
+		this.id = id;
+	}
+	public String getFirst_Name() {
+		return first_Name;
+	}
+	public void setFirst_Name(String first_Name) {
+		this.first_Name = first_Name;
+	}
+	public String getLast_Name() {
+		return last_Name;
+	}
+	public void setLast_Name(String last_Name) {
+		this.last_Name = last_Name;
+	}
+	public String getEmail() {
+		return email;
+	}
+	public void setEmail(String email) {
+		this.email = email;
+	}
+	public String getPhone() {
+		return phone;
+	}
+	public void setPhone(String phone) {
+		this.phone = phone;
+	}
+	
+	   @NotBlank(message = "Email is required")
+	    @Email(message = "Invalid email format")
+	    @Column(nullable = false, unique = true)
+	private String email;
+	   
+	   @NotBlank(message = "Phone number is required")
+	    @Pattern(
+	        regexp = "^(\\+250)?7\\d{8}$",  // ✅ Rwanda format (e.g., +2507XXXXXXXX )
+	        message = "Invalid phone number format. Example: +2507XXXXXXXX "
+	    )
+	    @Column(nullable = false, unique = true)
+    private String phone;
+}
