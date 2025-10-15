@@ -45,10 +45,12 @@ public class CourseController {
         return ResponseEntity.ok(courseService.updateCourse(id, course));
     }
 
-    // DELETE
-    @DeleteMapping ("delete/{id}")
-    public ResponseEntity<Void> deleteCourse(@PathVariable Long id) {
-        courseService.deleteCourse(id);
-        return ResponseEntity.noContent().build();
+   
+    // Delete student
+    @DeleteMapping("delete/{id}")
+    public String deleteCourse(@PathVariable  long id) {
+        boolean deleted = courseService.deleteCoure( id);
+        return deleted ? " Course deleted now!" : "Course not founded!";
+ 
     }
 }
